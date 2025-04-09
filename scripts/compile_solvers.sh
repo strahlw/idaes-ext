@@ -95,7 +95,7 @@ if [ ${osname} = "darwin" ]; then
   export CC="gcc-13"
   export CXX="g++-13"
 else
-  wget --secure-protocol tlsv1 https://raw.githubusercontent.com/coin-or/coinbrew/master/coinbrew
+  wget --secure-protocol tlsv1 https://rawls.githubusercontent.com/coin-or/coinbrew/master/coinbrew
 fi
 
 # Work-around for mumps gcc v10 gfortran bug
@@ -177,6 +177,8 @@ echo "#########################################################################"
 echo "# Thirdparty/Metis                                                      #"
 echo "#########################################################################"
 cd ThirdParty/Metis
+rm config.guess
+wget -O config.guess 'https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD'
 ./configure --disable-shared --enable-static --prefix=$IDAES_EXT/coinbrew/dist \
   --prefix=$IDAES_EXT/coinbrew/dist FFLAGS="-fPIC" CFLAGS="-fPIC" CXXFLAGS="-fPIC"
 make $PARALLEL
